@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/react-sailor-icons.svg?style=flat-square)](https://www.npmjs.com/package/react-sailor-icons)
 [![npm downloads](https://img.shields.io/npm/dm/react-sailor-icons.svg?style=flat-square)](https://www.npmjs.com/package/react-sailor-icons)
+[![HitCount](http://hits.dwyl.io/sailoricons/react-sailor-icons.svg)](http://hits.dwyl.io/sailoricons/react-sailor-icons)
 
 #### What is react-sailor-icons?
 react-sailor-icons is a collection of nice open source icons for React.js. Each icon is designed with an emphasis on simplicity, consistency and readability.
