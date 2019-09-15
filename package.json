@@ -1,6 +1,6 @@
 {
   "name": "react-sailor-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component for Sailor icons",
   "main": "build/index.js",
   "module": "dist/index.js",
