@@ -35,7 +35,13 @@ fs.writeFileSync(
   'utf-8',
 );
 
-const attrsToString = (attrs) => {
+const attrsToString = (attrs, iconName) => {
+  // broken viewbox on 'bookmarks'
+  switch(iconName) {
+    case 'bookmarks':
+      attrs.viewBox = '0 -4 13 23';
+      break;
+  }
   return Object.keys(attrs).map((key) => {
     if (key === 'width' || key === 'height' || key === 'stroke') {
       return key + '={' + attrs[key] + '}';
@@ -59,9 +65,9 @@ const withFill = svg => {
   return newSvgString
 }
 
-icons.forEach((i) => {
-  const location = path.join(rootDir, 'src/icons', `${i}.js`);
-  const ComponentName = (i === 'github') ? 'GitHub' : upperCamelCase(i);
+icons.forEach((iconName) => {
+  const location = path.join(rootDir, 'src/icons', `${iconName}.js`);
+  const ComponentName = upperCamelCase(iconName);
   const defaultAttrs = {
     xmlns: 'http://www.w3.org/2000/svg',
     width: 'size',
@@ -72,8 +78,8 @@ icons.forEach((i) => {
 
 
   const newSvg = `
-    <svg ${attrsToString(defaultAttrs)}>
-      ${sailorIcons[i]}
+    <svg ${attrsToString(defaultAttrs, iconName)}>
+      ${sailorIcons[iconName]}
     </svg>
   `
   const element = `
@@ -83,7 +89,7 @@ icons.forEach((i) => {
     const ${ComponentName} = (props) => {
       const { color, size, ...otherProps } = props;
       return (
-        <svg ${attrsToString(defaultAttrs)}>
+        <svg ${attrsToString(defaultAttrs, iconName)}>
           ${withFill(newSvg).replace(/fill="#000"/g, 'fill={color}')}
         </svg>
       )
@@ -121,7 +127,7 @@ icons.forEach((i) => {
 
   console.log('Successfully built', ComponentName);
 
-  const exportString = `export { default as ${ComponentName} } from './icons/${i}';\r\n`;
+  const exportString = `export { default as ${ComponentName} } from './icons/${iconName}';\r\n`;
   fs.appendFileSync(
     path.join(rootDir, 'src', 'index.js'),
     exportString,
